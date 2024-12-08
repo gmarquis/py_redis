@@ -1,0 +1,4 @@
+redis
+Fernet
+# cryptography.fernet
+# json:latest
