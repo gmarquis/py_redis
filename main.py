@@ -1,8 +1,8 @@
 #!/usr/bin/python
-import redis, json
+import redis, json, boto3, base64
 from pprint import pprint
 
-_redis = redis.Redis(host='192.168.1.184', port=6379, db=0)
+_redis = redis.Redis(host='10.122.159.4', port=6379, db=0)
 
 restaurant_484272 = {
     "name": "Ravagh",
@@ -34,10 +34,33 @@ from cryptography.fernet import Fernet
 key = Fernet.generate_key()
 print(key) ; key = Fernet(key)
 
+##
+def get_api_key(region: str, secret_name: str):
+    session = boto3.session.Session()
+    client = session.client(
+        aws_access_key_id="AKIA2WQEHK6Q3YVO5UL7",
+        aws_secret_access_key="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",
+        service_name='secretsmanager',
+        region_name="eu-west-1"
+    )
+    get_secret_value_response = client.get_secret_value(
+        SecretId=secret_name
+    )
+    secrets_response = get_secret_value_response['SecretString']
+
+    return json.loads(secrets_response)
+##
+
+secret = get_api_key('eu-west-1','secret-name1/prod/key')   # from Secrets Manager
+secret = secret['key']  # dict-key as string
+print(secret)
+key = base64.b64encode(secret.encode())
+key = Fernet(key)
+
 info = {
-    "card-number": 2211849528391929,
-    "exp": [2025, 8],
-    "cv2": 842,
+    "card-number": 3791849528391929,
+    "exp": [2026, 2],
+    "cv2": 248,
 }
 
 _redis.set(
@@ -47,5 +70,4 @@ _redis.set(
 
 print(_redis.get("user:1000")) # cipher
 print(json.loads(key.decrypt(_redis.get("user:1000"))))
-
 
