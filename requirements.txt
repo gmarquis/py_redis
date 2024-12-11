@@ -1,4 +1,5 @@
 redis
 Fernet
+boto3
 # cryptography.fernet
 # json:latest
