@@ -14,8 +14,8 @@ docker run -it --env-file ~/.aws/credentials redis_functions <br/>
 docker tag redis_functions:latest virtualvessel/public:redis_functions <br/>
 docker push docker tag virtualvessel/public:redis_functions
 
-Alternatively -
-docker pull virtualvessel/public:redis_functions
+Alternatively - <br/>
+docker pull virtualvessel/public:redis_functions <br/>
 
 Redis Insights - <br/>
 http://127.0.0.1:8001/redis-stack/browser <br/>
