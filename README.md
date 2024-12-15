@@ -1,6 +1,6 @@
 
-# Python collects bash variable(s) secret/key injected via docker run --env-file
-# Get, replace/encrypt Redis values using AWS Secrets Manager 'key'
+# Python collects aws-credentials from bash environment variables populated via docker run --env-file
+# Get, encrypt/replace Redis values using AWS Secrets Manager 'key'
 # https://github.com/redis/redis-py/blob/master/README.md <br/>
 # https://cryptography.io/en/latest/fernet/ <br/>
 # python3 redis_functions <br/>
@@ -24,6 +24,9 @@ ENTRYPOINT ["python", "main.py"] <br/>
 
 docker build -t redis_functions  -f Dockerfile . <br/>
 docker run -it --env-file ~/.aws/credentials redis_functions <br/>
+
+Alternatively -
+docker pull virtualvessel/public:redis_functions
 
 Redis Insights - <br/>
 http://127.0.0.1:8001/redis-stack/browser <br/>
