@@ -18,6 +18,7 @@ RUN pip install --upgrade pip setuptools wheel
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 RUN pip3 install cryptography
+RUN rm -rf /root/.cache/pip
 
 # Command to run your application (example)
 # CMD ["python", "main.py"]
