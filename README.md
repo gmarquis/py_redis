@@ -6,8 +6,9 @@
 # python3 redis_functions <br/>
 
 main.py <br/>
-dockerfile <br/>
+Dockerfile <br/>
 requirements.txt <br/>
+docker-compose.yml <br/>
 
 docker build -t redis_functions  -f Dockerfile . <br/>
 docker run -it --env-file ~/.aws/credentials redis_functions <br/>
