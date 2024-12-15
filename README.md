@@ -6,24 +6,13 @@
 # python3 redis_functions <br/>
 
 main.py <br/>
+dockerfile <br/>
 requirements.txt <br/>
-docker run -d --name redis-stack-server -p 6379:6379 redis/redis-stack-server:latest <br/>
-
-Dockerfile = <br/>
-FROM python:3.11-alpine <br/>
-ENV PYTHONUNBUFFERED=1 \ <br/>
-    PIP_NO_CACHE_DIR=1 <br/>
-WORKDIR /app <br/>
-COPY . /app <br/>
-RUN pip install --upgrade pip setuptools wheel <br/>
-COPY requirements.txt . <br/>
-RUN pip install -r requirements.txt <br/>
-RUN pip3 install cryptography <br/>
-EXPOSE 5000 <br/>
-ENTRYPOINT ["python", "main.py"] <br/>
 
 docker build -t redis_functions  -f Dockerfile . <br/>
 docker run -it --env-file ~/.aws/credentials redis_functions <br/>
+docker tag redis_functions:latest virtualvessel/public:redis_functions <br/>
+docker push docker tag virtualvessel/public:redis_functions
 
 Alternatively -
 docker pull virtualvessel/public:redis_functions
