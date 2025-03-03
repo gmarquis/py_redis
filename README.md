@@ -10,14 +10,13 @@ Dockerfile <br/>
 requirements.txt <br/>
 
 docker build -t redis_functions  -f Dockerfile . <br/>
-# docker run -it --env-file ~/.aws/credentials redis_functions <br/>
 docker tag redis_functions:latest virtualvessel/public:redis_functions <br/>
 docker push virtualvessel/public:redis_functions <br/>
-# Set linux environment variables for AWS access - <br/>
+1. Set linux environment variables for AWS access - <br/>
 aws_access_key_id=AKIA... <br/>
 aws_secret_access_key=... <br/>
 docker run -it redis_functions <br/>
-Alternativley - <br/>
+2. Alternativley - <br/>
 docker run -it --env-file ~/.aws/credentials redis_functions <br/>
 
 Alternatively - <br/>
