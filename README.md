@@ -9,9 +9,10 @@ main.py <br/>
 Dockerfile <br/>
 requirements.txt <br/>
 
+docker pull redis/redis-stack-server:lates <br/>
+docker run -d --name redis-stack-server -p 6379:6379 redis/redis-stack-server:latest <br/>
 docker pull virtualvessel/public:redis_functions <br/>
-
-Build locally - <br/>
+Or build locally - <br/>
 docker build -t redis_functions  -f Dockerfile . <br/>
 docker tag redis_functions:latest virtualvessel/public:redis_functions <br/>
 docker push virtualvessel/public:redis_functions <br/>
@@ -26,6 +27,6 @@ Redis Insights - <br/>
 http://127.0.0.1:8001/redis-stack/browser <br/>
 
 Redis Cli - <br/>
-docker exec -it container-name redis-cli <br/>
+docker exec -it redis-stack-server redis-cli <br/>
 SET GlenMarquis redis EX 60 NX <br/>
 DEL GlenMarquis <br/>
