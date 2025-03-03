@@ -8,12 +8,17 @@
 main.py <br/>
 Dockerfile <br/>
 requirements.txt <br/>
-docker-compose.yml <br/>
 
 docker build -t redis_functions  -f Dockerfile . <br/>
-docker run -it --env-file ~/.aws/credentials redis_functions <br/>
+# docker run -it --env-file ~/.aws/credentials redis_functions <br/>
 docker tag redis_functions:latest virtualvessel/public:redis_functions <br/>
-docker push docker tag virtualvessel/public:redis_functions
+docker push virtualvessel/public:redis_functions <br/>
+# Set linux environment variables for AWS access - <br/>
+aws_access_key_id=AKIA... <br/>
+aws_secret_access_key=... <br/>
+docker run -it redis_functions <br/>
+Alternativley - <br/>
+docker run -it --env-file ~/.aws/credentials redis_functions <br/>
 
 Alternatively - <br/>
 docker pull virtualvessel/public:redis_functions <br/>

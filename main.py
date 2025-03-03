@@ -1,9 +1,26 @@
-#!/usr/bin/python
-import redis, json, boto3, base64
+#!/usr/bin/python3
+import redis, json, boto3, base64, os, socket
 from pprint import pprint
 
-_redis = redis.Redis(host='192.168.1.184', port=6379, db=0)
-_redis = redis.Redis(host='172.20.7.233', port=6379, db=0)
+def isOpen(ip, port):
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.settimeout(1)
+    try:
+        is_open = s.connect_ex((ip, int(port))) == 0 # True if open, False if not
+        if is_open:
+            s.shutdown(socket.SHUT_RDWR)
+            return True
+    except Exception:
+        is_open = False
+    s.close()
+    return is_open
+
+if isOpen('192.168.1.184', '6379'):
+   _redis = redis.Redis(host='127.0.0.1', port=6379, db=0)
+else:
+   _redis = redis.Redis(host='127.0.0.1', port=6379, db=0)
+
+_redis = redis.Redis(host='192.168.1.183', port=6379, db=0)
 
 restaurant_484272 = {
     "name": "John",
@@ -61,16 +78,23 @@ key = base64.b64encode(secret.encode())
 key = Fernet(key)
 # print(key)
 
-#info = {
-#    "card-number": 3791849528391929,
-#    "exp": [2026, 2],
-#    "cv2": 248,
-#}
+info = {
+    "card-number": 3791849528391929,
+    "exp": [2026, 2],
+    "cv2": 248,
+}
 
-#_redis.set(
-#    "user:1000",
-#    key.encrypt(json.dumps(info).encode("utf-8"))
-#)
+if _redis.get("user:1002") == None:
+   print('creating user1002')
+   _redis.set(
+    "user:1002",
+    key.encrypt(json.dumps(info).encode("utf-8"))
+   )      
+else:
+    print('exists')
 
-print(_redis.get("user:1000"))
-print(json.loads(key.decrypt(_redis.get("user:1000"))))
+print(_redis.get("user:1002"))
+print(json.loads(key.decrypt(_redis.get("user:1002"))))
+
+
+exit()
