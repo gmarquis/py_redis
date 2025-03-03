@@ -9,6 +9,8 @@ main.py <br/>
 Dockerfile <br/>
 requirements.txt <br/>
 
+docker pull virtualvessel/public:redis_functions <br/>
+Or build locally - <br/>
 docker build -t redis_functions  -f Dockerfile . <br/>
 docker tag redis_functions:latest virtualvessel/public:redis_functions <br/>
 docker push virtualvessel/public:redis_functions <br/>
