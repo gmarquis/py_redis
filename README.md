@@ -10,7 +10,8 @@ Dockerfile <br/>
 requirements.txt <br/>
 
 docker pull virtualvessel/public:redis_functions <br/>
-Or build locally - <br/>
+
+Build locally - <br/>
 docker build -t redis_functions  -f Dockerfile . <br/>
 docker tag redis_functions:latest virtualvessel/public:redis_functions <br/>
 docker push virtualvessel/public:redis_functions <br/>
@@ -20,9 +21,6 @@ aws_secret_access_key=... <br/>
 docker run -it redis_functions <br/>
 2. Alternativley - <br/>
 docker run -it --env-file ~/.aws/credentials redis_functions <br/>
-
-Alternatively - <br/>
-docker pull virtualvessel/public:redis_functions <br/>
 
 Redis Insights - <br/>
 http://127.0.0.1:8001/redis-stack/browser <br/>
