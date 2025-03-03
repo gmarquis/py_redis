@@ -1,7 +1,7 @@
 
 Python collects aws-credentials from bash environment variables or via docker run --env-file <br/>
 The code -
-# get/encrypts/replaces Redis values using an AWS Secrets Manager 'key' <br/>
+# get/encrypt/replace Redis values by AWS Secrets Manager 'key' <br/>
 https://github.com/redis/redis-py/blob/master/README.md <br/>
 https://cryptography.io/en/latest/fernet/ <br/>
 
